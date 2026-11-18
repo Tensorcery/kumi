@@ -1,0 +1,22 @@
+[project]
+name = "kumi"
+version = "0.0.1"
+description = "Assemble projects from versioned blocks kept in a hub repository"
+readme = "README.md"
+authors = [{ name = "Tensorcery" }]
+requires-python = ">=3.15"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/Tensorcery/kumi"
+Repository = "https://github.com/Tensorcery/kumi"
+Issues = "https://github.com/Tensorcery/kumi/issues"
+
+[project.scripts]
+kumi = "kumi:main"
+
+[build-system]
+requires = ["uv_build>=0.13.6,<0.14.0"]
+build-backend = "uv_build"
