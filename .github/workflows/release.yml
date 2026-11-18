@@ -1,0 +1,22 @@
+# A merge into main releases the version in pyproject.toml, once: PyPI, the
+# GitHub release and its tag. Nothing happens while that version is tagged.
+name: release
+
+on:
+  push:
+    branches: [main]
+
+# One release at a time, never cancelled halfway.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # the tag and the release
+      id-token: write  # PyPI's Trusted Publishing
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: Tensorcery/actions/python/release@v1.0.0

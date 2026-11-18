@@ -1,0 +1,23 @@
+# Run by hand: opens the PR that bumps the version and the changelog.
+name: prepare release
+
+on:
+  workflow_dispatch:
+    inputs:
+      increment:
+        description: auto takes it from the commits since the last tag
+        type: choice
+        options: [auto, PATCH, MINOR, MAJOR]
+        default: auto
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # the release branch
+      pull-requests: write  # its PR
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: Tensorcery/actions/python/prepare-release@v1.0.0
+        with:
+          increment: ${{ inputs.increment != 'auto' && inputs.increment || '' }}
